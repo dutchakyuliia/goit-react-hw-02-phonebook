@@ -3,25 +3,35 @@ import { nanoid } from 'nanoid';
 export class CreateContacts extends Component {
   state = {
     name: '',
-    number: ''
+    number: '',
   };
   handleChange = evt => {
-    this.setState({ name: evt.target.value});
+    this.setState({ name: evt.target.value });
   };
   handleNumber = evt => {
- this.setState({ number: evt.target.value});
+    this.setState({ number: evt.target.value });
   };
-  
-  handleSubmit = (e) => {
-    this.props.saveContact({name: this.state.name, number:this.state.number, id: nanoid() }) 
-    e.preventDefault()
-  }
-  
+
+  handleSubmit = e => {
+    if (!this.props.contacts.some(contact => contact.name === this.state.name)) {
+      this.props.saveContact({
+        name: this.state.name,
+        number: this.state.number,
+        id: nanoid(),
+      });
+      this.reset()
+    } else {
+      alert('Name is already in contacts');
+    }
+
+    e.preventDefault();
+  };
+  reset = () => {this.setState({name: '', number: ''}) };
+
   render() {
     return (
       <div>
-        <h2>Phonebook</h2>
-        <form  onSubmit={this.handleSubmit}>
+        <form onSubmit={this.handleSubmit}>
           <h3>Name</h3>
           <input
             value={this.state.name}
@@ -34,13 +44,14 @@ export class CreateContacts extends Component {
           />
           <h3>Number</h3>
           <input
+            value={this.state.number}
             onChange={this.handleNumber}
-              type="tel"
-              name="number"
-              pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-              title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-              required
-            />
+            type="tel"
+            name="number"
+            pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+            title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+            required
+          />
           <button type="submit">Add contacts</button>
         </form>
       </div>
