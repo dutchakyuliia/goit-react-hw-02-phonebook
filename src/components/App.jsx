@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { CreateContacts } from './CreateContacts/CreateContacts';
 import { ListContacts } from './ListContacts/ListContacts';
 import { Search } from './Search/Search';
-import { ListItem } from './ListContacts/ListContactsItem';
 
 export class App extends Component {
   state = {
@@ -14,12 +13,12 @@ export class App extends Component {
     ],
     filter: '',
   };
-   
-    handleSearch = (evt) => {
-        this.setState({
-        filter: evt.target.value
-    })
-}
+
+  handleSearch = evt => {
+    this.setState({
+      filter: evt.target.value,
+    });
+  };
   saveContact = contact => {
     this.setState({
       contacts: [contact].concat(this.state.contacts),
@@ -27,16 +26,28 @@ export class App extends Component {
   };
   deleteContact = id => {
     this.setState({
-    contacts: this.state.contacts.filter(contact => contact.id !== id )
-  })};
+      contacts: this.state.contacts.filter(contact => contact.id !== id),
+    });
+  };
   render() {
     return (
       <div>
         <h2>Phonebook</h2>
-        <CreateContacts saveContact={this.saveContact} contacts={this.state.contacts}></CreateContacts>
+        <CreateContacts
+          saveContact={this.saveContact}
+          contacts={this.state.contacts}
+        ></CreateContacts>
         <h2>Contacts</h2>
-        <ListContacts onDelete={this.deleteContact} contacts={this.state.contacts.filter((contact)=> contact.name.toLowerCase().includes(this.state.filter.toLowerCase()))} ></ListContacts>
-        <Search filter={this.state.filter} handleSearch ={this.handleSearch}></Search>
+        <ListContacts
+          onDelete={this.deleteContact}
+          contacts={this.state.contacts.filter(contact =>
+            contact.name.toLowerCase().includes(this.state.filter.toLowerCase())
+          )}
+        ></ListContacts>
+        <Search
+          filter={this.state.filter}
+          handleSearch={this.handleSearch}
+        ></Search>
       </div>
     );
   }

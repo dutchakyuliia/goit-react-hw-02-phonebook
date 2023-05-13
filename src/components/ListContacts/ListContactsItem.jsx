@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-
-export class ListItem extends Component {
+import PropTypes from 'prop-types';
+export class ListContactsItem extends Component {
   render() {
     return (
       <li>{this.props.contact.name}  {this.props.contact.number}
@@ -11,3 +11,12 @@ export class ListItem extends Component {
     );
   }
 }
+ListContactsItem.propTypes = {
+  saveContact: PropTypes.string.isRequired,
+  contacts: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      number: PropTypes.number.isRequired,
+  }))
+};

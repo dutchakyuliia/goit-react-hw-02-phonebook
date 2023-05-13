@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { nanoid } from 'nanoid';
+import PropTypes from 'prop-types';
 export class CreateContacts extends Component {
   state = {
     name: '',
@@ -58,3 +59,12 @@ export class CreateContacts extends Component {
     );
   }
 }
+CreateContacts.propTypes = {
+  saveContact: PropTypes.string.isRequired,
+  contacts: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      number: PropTypes.number.isRequired,
+  }))
+};
