@@ -16,7 +16,7 @@ export class ListContacts extends Component {
 }
 
 ListContacts.propTypes = {
-  onDelete: PropTypes.string.isRequired,
+  onDelete: PropTypes.func.isRequired,
   contacts: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string.isRequired,

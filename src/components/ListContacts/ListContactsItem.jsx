@@ -12,7 +12,7 @@ export class ListContactsItem extends Component {
   }
 }
 ListContactsItem.propTypes = {
-  saveContact: PropTypes.string.isRequired,
+  onDelete: PropTypes.func.isRequired,
   contacts: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string.isRequired,
