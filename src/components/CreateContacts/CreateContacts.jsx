@@ -14,7 +14,7 @@ export class CreateContacts extends Component {
   };
 
   handleSubmit = e => {
-    if (!this.props.contacts.some(contact => contact.name === this.state.name)) {
+    if (!this.props.contacts.some(contact => contact.name.toLowerCase() === this.state.name.toLowerCase())) {
       this.props.saveContact({
         name: this.state.name,
         number: this.state.number,
